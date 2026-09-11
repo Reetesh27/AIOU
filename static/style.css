@@ -1,0 +1,163 @@
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.container.wide {
+    max-width: 1250px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-top: 0;
+}
+
+.info {
+    padding: 14px;
+    background: #eef6ff;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin: 20px 0 8px;
+}
+
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    margin-top: 18px;
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+}
+
+button.secondary {
+    background: #374151;
+}
+
+.alert {
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.alert.warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.example {
+    margin-top: 30px;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.columns span {
+    background: #f1f5f9;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.actions form {
+    margin: 0;
+}
+
+.actions button {
+    margin: 0;
+}
+
+.back {
+    display: inline-block;
+    padding: 11px 15px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+th, td {
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #f1f5f9;
+}
+
+@media (max-width: 650px) {
+    .container {
+        margin: 15px auto;
+        padding: 10px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+}
