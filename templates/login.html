@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Attendance Separator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container auth-container">
+    <section class="card auth-card">
+      <h1>Attendance Separator</h1>
+      <p class="muted">Sign in to use the attendance and CNIC matching system.</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endwith %}
+      <form method="post" autocomplete="off">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required autofocus>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+        <button class="btn primary full" type="submit">Login</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Attendance Separator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="topbar"><div><strong>Attendance Separator</strong></div><div>Signed in as {{ session.get("username", "user") }} · <a href="{{ url_for("logout") }}">Logout</a></div></nav>
+<div class="container">
+    <div class="card">
+        <h1>Attendance Separator</h1>
+        <p class="subtitle">
+            Upload today's Attendance Report PDF and enter the Copy/Script Numbers
+            you want to separate.
+        </p>
+
+        <div class="info">
+            <strong>Permanent CNIC database:</strong>
+            <code>cnic_data.pdf</code> (stored beside <code>app.py</code>)
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <label for="attendance_pdf">1. Attendance Report PDF</label>
+            <input id="attendance_pdf" name="attendance_pdf" type="file" accept=".pdf,application/pdf" required>
+
+            <label for="copy_numbers">2. Copy / Script Numbers</label>
+            <textarea
+                id="copy_numbers"
+                name="copy_numbers"
+                rows="7"
+                placeholder="Example:
+346126115
+346126128
+346126106
+
+You can also paste comma-separated numbers."
+                required></textarea>
+
+            <button type="submit">Separate Data</button>
+        </form>
+
+        <div class="example">
+            <h3>Output columns</h3>
+            <div class="columns">
+                <span>Copy Number</span>
+                <span>Student ID</span>
+                <span>Student Name</span>
+                <span>CNIC</span>
+                <span>Course Code</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

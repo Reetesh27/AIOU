@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Result - Attendance Separator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="topbar"><div><strong>Attendance Separator</strong></div><div>Signed in as {{ session.get("username", "user") }} · <a href="{{ url_for("logout") }}">Logout</a></div></nav>
+<div class="container wide">
+    <div class="card">
+        <h1>Separated Data</h1>
+        <p class="subtitle">{{ count }} record(s) selected.</p>
+
+        {% if missing_cnic %}
+        <div class="alert warning">
+            CNIC not found for Student ID(s):
+            {{ missing_cnic | join(", ") }}
+        </div>
+        {% endif %}
+
+        {% if not_found %}
+        <div class="alert warning">
+            Copy/Script Number(s) not found in the Attendance PDF:
+            {{ not_found | join(", ") }}
+        </div>
+        {% endif %}
+
+        <div class="actions">
+            <form method="POST" action="{{ url_for('download_excel') }}">
+                <input type="hidden" name="rows_json" value='{{ rows | tojson | forceescape }}'>
+                <button type="submit">Download Excel (.xlsx)</button>
+            </form>
+
+            <form method="POST" action="{{ url_for('download_txt') }}">
+                <input type="hidden" name="rows_json" value='{{ rows | tojson | forceescape }}'>
+                <button type="submit" class="secondary">Download Excel-Ready Text (.txt)</button>
+            </form>
+
+            <a class="back" href="{{ url_for('index') }}">Process another PDF</a>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Copy Number</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>CNIC</th>
+                        <th>Course Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <td>{{ row["Copy Number"] }}</td>
+                        <td>{{ row["Student ID"] }}</td>
+                        <td>{{ row["Student Name"] }}</td>
+                        <td>{{ row["CNIC"] }}</td>
+                        <td>{{ row["Course Code"] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
