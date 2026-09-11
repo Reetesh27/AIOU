@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: cnic-attendance-separator
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: LOGIN_USERNAME
+        sync: false
+      - key: LOGIN_PASSWORD
+        sync: false
+      - key: CNIC_PDF_PATH
+        value: /etc/secrets/cnic_data.pdf
+      - key: COOKIE_SECURE
+        value: "1"
